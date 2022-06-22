@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	--link summon
 	c:EnableReviveLimit()
-	Link.AddProcMixN(c,true,true,CARD_BLUEEYES_W_DRAGON,3)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,CARD_BLUEEYES_W_DRAGON),3)
 
 
 	--link summon
