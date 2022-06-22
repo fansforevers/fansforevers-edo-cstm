@@ -20,7 +20,7 @@ function s.initial_effect(c)
 
 	
 end
-
+s.listed_series={0xdd}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (c:IsReason(REASON_BATTLE) or (c:GetReasonPlayer()~=tp and c:IsReason(REASON_EFFECT)))
