@@ -28,7 +28,10 @@ function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 end
 
 
-
+function s.spfilter(c,e,tp)
+	return c:IsType(TYPE_FUSION) and c:GetLevel()<=5 and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
+		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial()
+end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
