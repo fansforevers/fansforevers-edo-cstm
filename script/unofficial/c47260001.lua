@@ -21,7 +21,8 @@ function s.initial_effect(c)
 	
 end
 s.listed_names={5126490}
-
+s.material_setcode={0x8}
+s.material={CARD_NEOS}
 
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
