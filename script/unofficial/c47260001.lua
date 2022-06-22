@@ -29,13 +29,13 @@ end
 
 
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_FUSION) and c:IsSetCard(0xdd) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
+	return c:IsType(TYPE_FUSION) and c:IsType(TYPE_SYNCHRO) and c:IsSetCard(0xdd) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
 	if chk==0 then return Duel.GetLocationCount(tp,LOCATION_MZONE)>0
 		and Duel.IsExistingMatchingCard(s.spfilter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
-	Duel.SetOperationInfo(0,CATEGORY_FUSION_SUMMON,nil,1,tp,LOCATION_EXTRA)
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
 end
 
 
