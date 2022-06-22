@@ -3,7 +3,7 @@ local s,id=GetID()
 function s.initial_effect(c)
 	-- link summon
 	c:EnableReviveLimit()
-	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xdd),3,99)
+	Link.AddProcedure(c,aux.FilterBoolFunctionEx(Card.IsSetCard,0xdd),3)
 
 	--Special Summon
 	local e4=Effect.CreateEffect(c)
@@ -22,3 +22,22 @@ function s.initial_effect(c)
 	-- c:EnableReviveLimit()
 	-- Link.AddProcedure(c,nil,3,3)
 end
+
+function s.sumcon(e,tp,eg,ep,ev,re,r,rp)
+	return e:GetHandler():IsPreviousPosition(POS_FACEUP) and e:GetHandler():IsPreviousLocation(LOCATION_ONFIELD)
+end
+function s.sumtg(e,tp,eg,ep,ev,re,r,rp,chk)
+	if chk==0 then return Duel.IsExistingMatchingCard(s.filter,tp,LOCATION_EXTRA,0,1,nil,e,tp) end
+	Duel.SetOperationInfo(0,CATEGORY_SPECIAL_SUMMON,nil,1,tp,LOCATION_EXTRA)
+end
+function s.sumop(e,tp,eg,ep,ev,re,r,rp)
+	local tg=Duel.GetFirstMatchingCard(s.filter,tp,LOCATION_EXTRA,0,nil,e,tp)
+	if tg then
+		Duel.SpecialSummon(tg,0,tp,tp,false,true,POS_FACEUP)
+	end
+end
+
+
+
+
+
