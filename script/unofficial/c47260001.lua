@@ -7,14 +7,14 @@ function s.initial_effect(c)
 
 	--Special Summon
 	local e4=Effect.CreateEffect(c)
-	e4:SetDescription(aux.Stringid(id,1))
-	e4:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
-	e4:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
-	e4:SetCategory(CATEGORY_SPECIAL_SUMMON)
-	e4:SetCode(EVENT_LEAVE_FIELD)
-	e4:SetCondition(s.sumcon)
-	e4:SetTarget(s.sumtg)
-	e4:SetOperation(s.sumop)
+	e1:SetDescription(aux.Stringid(id,1))
+	e1:SetType(EFFECT_TYPE_TRIGGER_O+EFFECT_TYPE_SINGLE)
+	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP)
+	e1:SetCategory(CATEGORY_SPECIAL_SUMMON)
+	e1:SetCode(EVENT_LEAVE_FIELD)
+	e1:SetCondition(s.sumcon)
+	e1:SetTarget(s.sumtg)
+	e1:SetOperation(s.sumop)
 	c:RegisterEffect(e4)
 	
 	
