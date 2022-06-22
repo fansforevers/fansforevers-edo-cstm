@@ -20,7 +20,7 @@ function s.initial_effect(c)
 
 	
 end
-s.listed_series={0xdd}
+-- s.listed_series={0xdd}
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (c:IsReason(REASON_BATTLE) or (c:GetReasonPlayer()~=tp and c:IsReason(REASON_EFFECT)))
@@ -29,7 +29,7 @@ end
 
 
 function s.spfilter(c,e,tp)
-	return c:IsType(TYPE_FUSION) and c:GetLevel()<=12 and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
+	return c:IsType(TYPE_FUSION) and c:IsSetCard(0xdd) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
 		and c:IsCanBeSpecialSummoned(e,SUMMON_TYPE_FUSION,tp,false,false) and c:CheckFusionMaterial()
 end
 function s.sptg(e,tp,eg,ep,ev,re,r,rp,chk)
