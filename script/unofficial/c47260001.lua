@@ -63,6 +63,7 @@ end
 
 
 -- Graveyard effect
+s.listed_names={0xdd}
 function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
 	return Duel.IsMainPhase() and Duel.IsTurnPlayer(tp) and aux.exccon(e)
 end
