@@ -78,21 +78,11 @@ function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
 	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,2)
 end
 function s.tdop(e,tp,eg,ep,ev,re,r,rp)
-	-- local tc=Duel.GetFirstTarget()
-	-- if tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_EXTRA) then
-	-- 	Duel.BreakEffect()
-	-- 	Duel.Draw(tp,2,REASON_EFFECT)
-	-- end
-
-
-	local tg=Duel.GetChainInfo(0,CHAININFO_TARGET_CARDS)
-	if not tg or tg:FilterCount(Card.IsRelateToEffect,nil,e)~=5 then return end
-	Duel.SendtoDeck(tg,nil,0,REASON_EFFECT)
-	local g=Duel.GetOperatedGroup()
-	if g:IsExists(Card.IsLocation,1,nil,LOCATION_DECK) then Duel.ShuffleDeck(tp) end
-	local ct=g:FilterCount(Card.IsLocation,nil,LOCATION_DECK+LOCATION_EXTRA)
-	if ct==5 then
+	local tc=Duel.GetFirstTarget()
+	if tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_EXTRA) then
 		Duel.BreakEffect()
 		Duel.Draw(tp,2,REASON_EFFECT)
 	end
+
+	
 end
