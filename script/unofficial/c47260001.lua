@@ -13,19 +13,42 @@ function s.initial_effect(c)
 	e1:SetType(EFFECT_TYPE_SINGLE+EFFECT_TYPE_TRIGGER_O)
 	e1:SetCode(EVENT_LEAVE_FIELD)
 	e1:SetProperty(EFFECT_FLAG_DAMAGE_STEP+EFFECT_FLAG_DELAY)
-	e1:SetCondition(s.spcon+s.tdcon)
-	e1:SetTarget(s.sptg+s.tdtg)
+	e1:SetCondition(s.spcon,s.tdcon)
+	e1:SetTarget(s.sptg,s.tdtg)
 	e1:SetOperation(s.spop)
 	c:RegisterEffect(e1)
 
 	
 end
--- s.listed_series={0xdd}
+
 function s.spcon(e,tp,eg,ep,ev,re,r,rp)
 	local c=e:GetHandler()
 	return (c:IsReason(REASON_BATTLE) or (c:GetReasonPlayer()~=tp and c:IsReason(REASON_EFFECT)))
 		and c:IsPreviousPosition(POS_FACEUP)
 end
+
+
+
+-- Graveyard effect
+function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
+	return Duel.IsMainPhase() and Duel.IsTurnPlayer(tp) and aux.exccon(e)
+end
+function s.tdfilter(c)
+	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToExtra()
+end
+function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
+	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tdfilter(chkc) end
+	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
+	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
+	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
+	Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,g,1,0,0)
+	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
+end
+
+
+
+
+
 
 function s.spfilter(c,e,tp)
 	return c:IsType(TYPE_FUSION) and c:IsSetCard(0xdd) and Duel.GetLocationCountFromEx(tp,tp,nil,c)>0
@@ -47,19 +70,4 @@ function s.spop(e,tp,eg,ep,ev,re,r,rp)
 end
 
 
--- Graveyard effect
-function s.tdcon(e,tp,eg,ep,ev,re,r,rp)
-	return Duel.IsMainPhase() and Duel.IsTurnPlayer(tp) and aux.exccon(e)
-end
-function s.tdfilter(c)
-	return c:IsType(TYPE_SYNCHRO) and c:IsAbleToExtra()
-end
-function s.tdtg(e,tp,eg,ep,ev,re,r,rp,chk,chkc)
-	if chkc then return chkc:IsLocation(LOCATION_GRAVE) and chkc:IsControler(tp) and s.tdfilter(chkc) end
-	if chk==0 then return Duel.IsExistingTarget(s.tdfilter,tp,LOCATION_GRAVE,0,1,nil) end
-	Duel.Hint(HINT_SELECTMSG,tp,HINTMSG_TODECK)
-	local g=Duel.SelectTarget(tp,s.tdfilter,tp,LOCATION_GRAVE,0,1,1,nil)
-	Duel.SetOperationInfo(0,CATEGORY_TOEXTRA,g,1,0,0)
-	Duel.SetOperationInfo(0,CATEGORY_DRAW,nil,0,tp,1)
-end
 
