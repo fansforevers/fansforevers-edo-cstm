@@ -1,4 +1,4 @@
--- Blue-Eyes Endless-God Dragon
+-- Blue-Eyes Endless Dragon
 local s,id=GetID()
 function s.initial_effect(c)
 	-- link summon
