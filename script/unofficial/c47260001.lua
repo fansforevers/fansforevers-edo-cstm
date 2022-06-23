@@ -81,6 +81,6 @@ function s.tdop(e,tp,eg,ep,ev,re,r,rp)
 	local tc=Duel.GetFirstTarget()
 	if tc:IsRelateToEffect(e) and Duel.SendtoDeck(tc,nil,0,REASON_EFFECT)>0 and Duel.GetOperatedGroup():GetFirst():IsLocation(LOCATION_EXTRA) then
 		Duel.BreakEffect()
-		Duel.Draw(tp,1,REASON_EFFECT)
+		Duel.Draw(tp,2,REASON_EFFECT)
 	end
 end
